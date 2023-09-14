@@ -89,3 +89,5 @@ fastlane/test_output
 
 iOSInjectionProject/
 .DS_Store
+SimpleCalendarExample/SimpleCalendarExample.xcodeproj/xcuserdata/anikin.xcuserdatad/xcschemes/xcschememanagement.plist
+*.xcuserstate

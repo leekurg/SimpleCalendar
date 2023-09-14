@@ -1,3 +1,3 @@
 # SimpleCalendar
 
-A description of this package.
+SwiftUI simple calendar view for displaying specified month's days

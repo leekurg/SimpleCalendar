@@ -5,17 +5,12 @@
 //  Created by Илья Аникин on 14.09.2023.
 //
 
+import SimpleCalendar
 import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
-        }
-        .padding()
+        SimpleCalendarView(month: 2, year: 2023)
     }
 }
 
