@@ -9,9 +9,11 @@ import SwiftUI
 
 struct WeekdaySymbolView: View {
     let title: String
+
     var body: some View {
         Text(title)
-            .font(.system(size: 10, weight: .regular))
+            .lineLimit(1)
+            .foregroundColor(.black.opacity(0.5))
     }
 }
 

@@ -8,30 +8,21 @@
 import Foundation
 
 enum DisplayableDay {
-    case past(_ day: Day)
+    case regular(_ day: Day)
     case today(_ day: Day)
-    case future(_ day: Day)
+    case weekend(_ day: Day)
     case anotherMonth(_ dat: Day)
 
     var value: Day {
         switch self {
-        case .past(let day):
+        case .regular(let day):
             return day
         case .today(let day):
             return day
-        case .future(let day):
+        case .weekend(let day):
             return day
         case .anotherMonth(let day):
             return day
-        }
-    }
-
-    var isAnotherMonth: Bool {
-        switch self {
-        case .anotherMonth:
-            return true
-        default:
-            return false
         }
     }
 }

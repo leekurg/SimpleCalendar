@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct Month {
+struct Month {
     let daysSequence: [DisplayableDay]
     let weekdaySequence: [Weekday]
 
@@ -16,12 +16,21 @@ public struct Month {
 
     static private let calendar = Calendar.current
 
-    public init(month: Int, year: Int, weekdaySymbolFormat: WeekdaySymbolFormat) {
+    init(month: Int, year: Int, weekdaySymbolFormat: WeekdaySymbolFormat) {
         self.monthNumber = month
         self.year = year
 
         self.daysSequence = Self.makeMonthDaysSequence(month: month, year: year)
         self.weekdaySequence = Self.makeWeekdaySymbolsSequence(weekdaySymbolFormat)
+    }
+}
+
+extension Month {
+    init(from date: Date, weekdaySymbolFormat: WeekdaySymbolFormat) {
+        let month = date.get(.month)
+        let year = date.get(.year)
+
+        self.init(month: month, year: year, weekdaySymbolFormat: weekdaySymbolFormat)
     }
 }
 
@@ -54,16 +63,14 @@ private extension Month {
                 if !monthDateInterval.contains(day) {
                     return .anotherMonth(Day(dayInMonth: dayInMonth))
 
-                } else if day < .todayNoon() {
-                    return .past(Day(dayInMonth: dayInMonth))
-
-                } else if day == .todayNoon() {
+                } else if calendar.isDateInToday(day) {
                     return .today(Day(dayInMonth: dayInMonth))
 
-                } else if day > .todayNoon() {
-                    return .future(Day(dayInMonth: dayInMonth))
+                } else if calendar.isDateInWeekend(day) {
+                    return .weekend(Day(dayInMonth: dayInMonth))
+
                 } else {
-                    return .anotherMonth(Day(dayInMonth: dayInMonth))
+                    return .regular(Day(dayInMonth: dayInMonth))
                 }
             }
     }
@@ -72,10 +79,14 @@ private extension Month {
         let weekdaySymbols: [String]
 
         switch format {
+        case .empty:
+            weekdaySymbols = []
         case .veryShort:
-            weekdaySymbols = calendar.veryShortWeekdaySymbols
+            weekdaySymbols = calendar.veryShortStandaloneWeekdaySymbols
         case .short:
-            weekdaySymbols = calendar.shortWeekdaySymbols
+            weekdaySymbols = calendar.shortStandaloneWeekdaySymbols
+        case .standart:
+            weekdaySymbols = calendar.standaloneWeekdaySymbols
         }
 
         return weekdaySymbols.map { symbol in

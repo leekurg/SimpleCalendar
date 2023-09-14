@@ -6,5 +6,8 @@
 //
 
 public enum WeekdaySymbolFormat {
-    case veryShort, short
+    case empty
+    case veryShort
+    case short
+    case standart
 }
