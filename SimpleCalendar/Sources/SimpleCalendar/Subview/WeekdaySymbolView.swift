@@ -9,16 +9,18 @@ import SwiftUI
 
 struct WeekdaySymbolView: View {
     let title: String
+    @Environment(\.calendarTintColor) var calendarTintColor
 
     var body: some View {
         Text(title)
             .lineLimit(1)
-            .foregroundColor(.black.opacity(0.5))
+            .foregroundColor(calendarTintColor.opacity(0.5))
     }
 }
 
 struct WeekdaySymbolView_Previews: PreviewProvider {
     static var previews: some View {
         WeekdaySymbolView(title: "S")
+            .foregroundColor(.red)
     }
 }

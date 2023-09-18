@@ -10,25 +10,27 @@ import SwiftUI
 struct DayView: View {
     let dispayableDay: DisplayableDay
     let fontSize: CGFloat
-
+    @Environment(\.calendarTintColor) var calendarTintColor
+    
     var body: some View {
         Group {
             switch dispayableDay {
             case .regular(let day):
                 Text("\(day.dayInMonth)")
+                    .foregroundColor(calendarTintColor)
 
             case .today(let day):
                 Text("\(day.dayInMonth)")
                     .foregroundColor(.white)
                     .background(
                         Circle()
-                            .fill(Color.accentColor)
+                            .fill(calendarTintColor)
                             .padding(-fontSize / 3.0)
                     )
 
             case .weekend(let day):
                 Text("\(day.dayInMonth)")
-                    .foregroundColor(.black.opacity(0.5))
+                    .foregroundColor(calendarTintColor.opacity(0.5))
 
             case .anotherMonth:
                 Text("00").hidden()
