@@ -39,7 +39,7 @@ struct ContentView: View {
                 RoundedRectangle(cornerRadius: 16)
                     .fill(Color(white: 0.95))
             )
-            .accentColor(.orange)
+            .calendarTintColor(.orange)
             .padding(.horizontal)
 
             SimpleCalendarView(
@@ -56,7 +56,7 @@ struct ContentView: View {
                 RoundedRectangle(cornerRadius: 5)
                     .fill(Color(white: 0.95))
             )
-            .accentColor(.orange)
+            .calendarTintColor(.red)
         }
     }
 }

@@ -93,6 +93,6 @@ struct SimpleCalendarView_Previews: PreviewProvider {
             RoundedRectangle(cornerRadius: 16)
                 .fill(Color(white: 0.95))
         )
-        .accentColor(.orange)
+        .calendarTintColor(.green)
     }
 }
