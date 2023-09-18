@@ -2,8 +2,10 @@
 SwiftUI simple calendar view for displaying specified month's days. Supports **iOS v14**.
 
 <p align="center">
-<img width="361" alt="SimpleCalendar samples" src="https://github.com/leekurg/SimpleCalendar/assets/105886145/15f8210f-5137-4794-a3af-45553e8ecd29">
+<img width="361" alt="SimpleCalendar samples" src="https://github.com/leekurg/SimpleCalendar/assets/105886145/e08ec461-435f-434d-89e0-5d8fc1d74ad9">
 </p>
+
+
 
 ### Overview
 Simple, easy-to-use or change calendar view. Feel free to take and change on your behalf.
@@ -16,7 +18,7 @@ Repository includes a package **SimpleCalendar** for install and project **Simpl
 2. Configure font size
 3. Choose built-in styles of calendar's header - localized short, full or completely off day titles
 4. Configure header padding or cell spacing
-5. Use system modifiers to change **SimpleCalendar** appearence(`accentColor()`, `foregroundColor()` and more)
+5. Use built-in modifier `.calendarTintColor()` to change **SimpleCalendar** tint color appearence
 
 ### Install
 `SPM` installation: in **Xcode** tap «**File → Add packages…**», paste is search field the URL of this page and press «**Add package**».
@@ -34,5 +36,5 @@ SimpleCalendarView(
   weekdaySymbolFormat: .short
 )
 .padding(15)
-.accentColor(.orange)
+.calendarTintColor(.orange)
 ```
