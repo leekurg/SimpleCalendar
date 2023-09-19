@@ -13,29 +13,42 @@ struct Month {
 
     private let monthNumber: Int
     private let year: Int
+    private let calendar: Calendar
 
-    static private let calendar = Calendar.current
-
-    init(month: Int, year: Int, weekdaySymbolFormat: WeekdaySymbolFormat) {
+    init(
+        month: Int,
+        year: Int,
+        calendar: Calendar,
+        weekdaySymbolFormat: WeekdaySymbolFormat
+    ) {
         self.monthNumber = month
         self.year = year
-
-        self.daysSequence = Self.makeMonthDaysSequence(month: month, year: year)
-        self.weekdaySequence = Self.makeWeekdaySymbolsSequence(weekdaySymbolFormat)
+        self.calendar = calendar
+        self.daysSequence = Self.makeMonthDaysSequence(month: month, year: year, calendar: calendar)
+        self.weekdaySequence = Self.makeWeekdaySymbolsSequence(weekdaySymbolFormat, calendar: calendar)
     }
 }
 
 extension Month {
-    init(from date: Date, weekdaySymbolFormat: WeekdaySymbolFormat) {
+    init(
+        from date: Date,
+        calendar: Calendar,
+        weekdaySymbolFormat: WeekdaySymbolFormat
+    ) {
         let month = date.get(.month)
         let year = date.get(.year)
 
-        self.init(month: month, year: year, weekdaySymbolFormat: weekdaySymbolFormat)
+        self.init(
+            month: month,
+            year: year,
+            calendar: calendar,
+            weekdaySymbolFormat: weekdaySymbolFormat
+        )
     }
 }
 
 private extension Month {
-    static func makeMonthDaysSequence(month: Int, year: Int) -> [DisplayableDay] {
+    static func makeMonthDaysSequence(month: Int, year: Int, calendar: Calendar) -> [DisplayableDay] {
         guard let monthDateInterval = calendar.monthDateInterval(month: month, year: year) else { return [] }
 
         let gridDateInterval: DateInterval
@@ -75,7 +88,7 @@ private extension Month {
             }
     }
 
-    static func makeWeekdaySymbolsSequence(_ format: WeekdaySymbolFormat) -> [Weekday] {
+    static func makeWeekdaySymbolsSequence(_ format: WeekdaySymbolFormat, calendar: Calendar) -> [Weekday] {
         let weekdaySymbols: [String]
 
         switch format {
@@ -89,8 +102,17 @@ private extension Month {
             weekdaySymbols = calendar.standaloneWeekdaySymbols
         }
 
-        return weekdaySymbols.map { symbol in
-            Weekday(title: symbol)
-        }
+        return weekdaySymbols.moveFirstToLast(when: calendar.firstWeekday == 2)
+            .map { symbol in
+                Weekday(title: symbol)
+            }
+    }
+}
+
+fileprivate extension Array where Element == String {
+    func moveFirstToLast(when: Bool = true) -> Self {
+        guard when, !self.isEmpty else { return self }
+
+        return Array(self[1..<count] + [self[0]] )
     }
 }

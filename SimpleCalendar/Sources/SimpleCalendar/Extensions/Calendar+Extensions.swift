@@ -8,9 +8,17 @@
 import Foundation
 
 extension Calendar {
+    /// Calendar with current app locale
+    public static var localizedCurrent: Calendar {
+        var calendar = Self.autoupdatingCurrent
+        calendar.locale = Locale(identifier: Locale.preferredLanguages[0])
+
+        return calendar
+    }
+
     /// Index of last day oh the week, depends on calenadar's type (gregorian ot other)
     var lastWeekday: Int {
-        self.firstWeekday == 1 ? 7 : 1
+        self.firstWeekday == 1 ? daysInWeek : 1
     }
 
     /// Returns a DateInterval for given month

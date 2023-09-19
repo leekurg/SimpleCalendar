@@ -18,6 +18,7 @@ public struct SimpleCalendarView: View {
     public init(
         month: Int,
         year: Int,
+        calendar: Calendar = .localizedCurrent,
         fontSize: CGFloat = 16,
         verticalCellPadding: CGFloat = 0,
         weekdayHeaderPadding: CGFloat = 15,
@@ -26,6 +27,7 @@ public struct SimpleCalendarView: View {
         self.month = Month(
             month: month,
             year: year,
+            calendar: calendar,
             weekdaySymbolFormat: weekdaySymbolFormat
         )
 
@@ -61,6 +63,7 @@ public struct SimpleCalendarView: View {
 public extension SimpleCalendarView {
     init(
         from date: Date,
+        calendar: Calendar = .localizedCurrent,
         fontSize: CGFloat = 16,
         verticalCellPadding: CGFloat = 0,
         weekdayHeaderPadding: CGFloat = 15,
@@ -69,6 +72,7 @@ public extension SimpleCalendarView {
         self.init(
             month: date.get(.month),
             year: date.get(.year),
+            calendar: calendar,
             fontSize: fontSize,
             verticalCellPadding: verticalCellPadding,
             weekdayHeaderPadding: weekdayHeaderPadding,
