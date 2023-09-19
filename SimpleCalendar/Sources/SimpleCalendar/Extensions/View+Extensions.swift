@@ -23,4 +23,3 @@ extension EnvironmentValues {
 fileprivate struct CalendarTintColor: EnvironmentKey {
     static let defaultValue: Color = .black
 }
-
